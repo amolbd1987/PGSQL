@@ -1,0 +1,44 @@
+Migration steps:
+
+1.install sequelize-CLI using
+	$ npm install -g --save sequelize-cli	
+
+2.Create .sequelizerc File at project root level with following information
+
+	const path = require('path');
+
+	module.exports = {
+	  'config': path.resolve('config', 'database.json'),
+	  'models-path': path.resolve('db', 'models'),
+	  'seeders-path': path.resolve('db', 'seeders'),
+	  'migrations-path': path.resolve('db', 'migrations')
+	}
+	
+	OR
+	module.exports = {
+	  "config": path.resolve('./config', 'config.json'),
+	  "models-path": path.resolve('./models'),
+	  "seeders-path": path.resolve('./seeders'),
+	  "migrations-path": path.resolve('./migrations')
+	};
+
+3. With this config you are telling CLI to
+    Use config/database.json file for config settings
+    Use db/models as models folder
+    Use db/seeders as seeders folder
+    Use db/migrations as migrations folder
+
+4. use command to migrate
+	$ sequelize db:migrate	
+
+5. to undo migration 
+	$ sequelize db:migrate:undo 	//it will revert last migration file changes
+	$ sequelize db:migrate:undo:all //to revert all changes
+
+6. if database is not created then first use command
+	$ sequelize db:create 
+
+7. to create new model as USER
+
+	sequelize model:generate --name User --attributes firstName:string,lastName:string,email:string
+	
